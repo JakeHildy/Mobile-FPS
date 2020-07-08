@@ -29,6 +29,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Text roomInfoText;
     public GameObject playerListPrefab;
     public GameObject playerListContent;
+    public GameObject startGameButton;
 
     [Header("Room List UI Panel")]
     public GameObject RoomList_UI_Panel;
@@ -119,6 +120,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         ActivatePanel(GameOptions_UI_Panel.name);
     }
 
+    public void OnLeaveButtonClicked()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
     #endregion
 
     // ==================== PHOTON CALLBACKS ====================
@@ -145,6 +151,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + " joined " + PhotonNetwork.CurrentRoom.Name);
         ActivatePanel(InsideRoom_UI_Panel.name);
+
+        if (PhotonNetwork.LocalPlayer.IsMasterClient)
+        {
+            startGameButton.SetActive(true);
+        }
+        else
+        {
+            startGameButton.SetActive(false);
+        }
 
         roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " "+
                             "Players/Max.players: " +
@@ -211,9 +226,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                     "Players/Max.players: " +
                     PhotonNetwork.CurrentRoom.PlayerCount + "/" +
                     PhotonNetwork.CurrentRoom.MaxPlayers;
-                    
+
         Destroy(playerListGameObjects[otherPlayer.ActorNumber].gameObject);
         playerListGameObjects.Remove(otherPlayer.ActorNumber);
+
+        if (PhotonNetwork.LocalPlayer.IsMasterClient)
+        {
+            startGameButton.SetActive(true);
+        }
+        else
+        {
+            startGameButton.SetActive(false);
+        }
     }
 
     public override void OnLeftRoom()

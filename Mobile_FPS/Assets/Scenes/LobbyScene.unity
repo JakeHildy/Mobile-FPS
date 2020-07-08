@@ -1105,8 +1105,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OnLeaveGameButtonClicked
+      - m_Target: {fileID: 1546401145}
+        m_MethodName: OnLeaveButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4110,6 +4110,7 @@ MonoBehaviour:
   playerListPrefab: {fileID: 1252797748048109091, guid: 5dc44bfa7a0d258489acbcd2b912d338,
     type: 3}
   playerListContent: {fileID: 1396198818}
+  startGameButton: {fileID: 503160507}
   RoomList_UI_Panel: {fileID: 2010485768}
   roomListEntryPrefab: {fileID: 841278376669109242, guid: 1b50ba566761f6c42bf8b3c775911a8d,
     type: 3}
