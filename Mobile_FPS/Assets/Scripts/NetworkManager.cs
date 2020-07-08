@@ -7,6 +7,7 @@ using Photon.Realtime;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    // ===== PUBLIC VARIABLES =====
     [Header("Connection Status")]
     public Text connectionStatusText;
 
@@ -35,10 +36,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject JoinRandomRoom_UI_Panel;
 
 
+    // ===== PRIVATE VARIABLES =====
     private Dictionary<string, RoomInfo> cachedRoomList; 
     private Dictionary<string, GameObject> roomListGameObjects;
 
 
+    // ==================== UNITY METHODS ====================
     #region Unity Methods
     // Start is called before the first frame update
     void Start()
@@ -56,6 +59,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     #endregion
 
+    // ==================== UI CALLBACKS ====================
     #region UI Callbacks
     public void OnLoginButtonClicked()
     {
@@ -102,8 +106,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         ActivatePanel(RoomList_UI_Panel.name);
     }
 
+    public void OnBackButtonClicked()
+    {
+        if (PhotonNetwork.InLobby)
+        {
+            PhotonNetwork.LeaveLobby();
+        }
+        ActivatePanel(GameOptions_UI_Panel.name);
+    }
+
     #endregion
 
+    // ==================== PHOTON CALLBACKS ====================
     #region Photon Callbacks
 
     public override void OnConnected()
@@ -173,13 +187,33 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
             roomListGameObjects.Add(room.Name, roomListEntryGameObject);
         }
-        
-
     }
 
- 
+    public override void OnLeftLobby()
+    {
+        ClearRoomListView();
+        cachedRoomList.Clear();
+    }
+
+
     #endregion
 
+    // ==================== PUBLIC METHODS ====================
+    #region Public Methods
+    public void ActivatePanel(string panelToBeActivated)
+    {
+        Login_UI_Panel.SetActive(panelToBeActivated.Equals(Login_UI_Panel.name));
+        GameOptions_UI_Panel.SetActive(panelToBeActivated.Equals(GameOptions_UI_Panel.name));
+        CreateRoom_UI_Panel.SetActive(panelToBeActivated.Equals(CreateRoom_UI_Panel.name));
+        InsideRoom_UI_Panel.SetActive(panelToBeActivated.Equals(InsideRoom_UI_Panel.name));
+        RoomList_UI_Panel.SetActive(panelToBeActivated.Equals(RoomList_UI_Panel.name));
+        JoinRandomRoom_UI_Panel.SetActive(panelToBeActivated.Equals(JoinRandomRoom_UI_Panel.name));
+    }
+
+
+    #endregion
+
+    // ==================== PRIVATE METHODS ====================
     #region Private Methods
 
     private void OnJoinRoomButtonClicked(string _roomName)
@@ -203,18 +237,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     #endregion
 
-    #region Public Methods
-    public void ActivatePanel(string panelToBeActivated)
-    {
-        Login_UI_Panel.SetActive(panelToBeActivated.Equals(Login_UI_Panel.name));
-        GameOptions_UI_Panel.SetActive(panelToBeActivated.Equals(GameOptions_UI_Panel.name));
-        CreateRoom_UI_Panel.SetActive(panelToBeActivated.Equals(CreateRoom_UI_Panel.name));
-        InsideRoom_UI_Panel.SetActive(panelToBeActivated.Equals(InsideRoom_UI_Panel.name));
-        RoomList_UI_Panel.SetActive(panelToBeActivated.Equals(RoomList_UI_Panel.name));
-        JoinRandomRoom_UI_Panel.SetActive(panelToBeActivated.Equals(JoinRandomRoom_UI_Panel.name));
-    }
 
-
-    #endregion
 }
 
