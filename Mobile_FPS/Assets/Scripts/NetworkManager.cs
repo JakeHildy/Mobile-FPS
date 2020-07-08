@@ -127,6 +127,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
+<<<<<<< HEAD
     public void OnJoinRandomRoomButtonClicked()
     {
         ActivatePanel(JoinRandomRoom_UI_Panel.name);
@@ -141,6 +142,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }        
     }
 
+=======
+>>>>>>> parent of 208bf53... Added Ability to Join Random Rooms
     #endregion
 
     // ==================== PHOTON CALLBACKS ====================
@@ -322,16 +325,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         cachedRoomList.Clear();
     }
 
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        Debug.Log(message);
-        string roomName = "Room " + Random.Range(1000, 10000);
 
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 20;
-
-        PhotonNetwork.CreateRoom(roomName, roomOptions);
-    }
 
 
     #endregion
