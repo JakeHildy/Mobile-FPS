@@ -26,6 +26,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     [Header("Inside Room UI Panel")]
     public GameObject InsideRoom_UI_Panel;
+    public Text roomInfoText;
+    public GameObject playerListPrefab;
+    public GameObject playerListContent;
 
     [Header("Room List UI Panel")]
     public GameObject RoomList_UI_Panel;
@@ -141,6 +144,31 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + " joined " + PhotonNetwork.CurrentRoom.Name);
         ActivatePanel(InsideRoom_UI_Panel.name);
+
+        roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " "+
+                            "Players/Max.players: " +
+                            PhotonNetwork.CurrentRoom.PlayerCount + "/" +
+                            PhotonNetwork.CurrentRoom.MaxPlayers;
+        
+       // Instantiating player list gameobjects: 
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            GameObject playerListGameObject = Instantiate(playerListPrefab);
+            playerListGameObject.transform.SetParent(playerListContent.transform);
+            playerListGameObject.transform.localScale = Vector3.one;
+
+            playerListGameObject.transform.Find("PlayerNameText").GetComponent<Text>().text = player.NickName;
+
+            if (player.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+            {
+                playerListGameObject.transform.Find("PlayerIndicator").gameObject.SetActive(true);
+            }
+            else
+            {
+                playerListGameObject.transform.Find("PlayerIndicator").gameObject.SetActive(false);
+            }
+        }
+       //PhotonNetwork.PlayerList 
     }
 
 
@@ -196,6 +224,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
 
+
+
     #endregion
 
     // ==================== PUBLIC METHODS ====================
@@ -209,7 +239,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         RoomList_UI_Panel.SetActive(panelToBeActivated.Equals(RoomList_UI_Panel.name));
         JoinRandomRoom_UI_Panel.SetActive(panelToBeActivated.Equals(JoinRandomRoom_UI_Panel.name));
     }
-
 
     #endregion
 

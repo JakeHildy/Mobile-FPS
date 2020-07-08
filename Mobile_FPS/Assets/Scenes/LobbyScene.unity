@@ -4106,6 +4106,10 @@ MonoBehaviour:
   roomNameInputField: {fileID: 460123711}
   maxPlayerInputField: {fileID: 217544445}
   InsideRoom_UI_Panel: {fileID: 1760134789}
+  roomInfoText: {fileID: 873426530}
+  playerListPrefab: {fileID: 1252797748048109091, guid: 5dc44bfa7a0d258489acbcd2b912d338,
+    type: 3}
+  playerListContent: {fileID: 1396198818}
   RoomList_UI_Panel: {fileID: 2010485768}
   roomListEntryPrefab: {fileID: 841278376669109242, guid: 1b50ba566761f6c42bf8b3c775911a8d,
     type: 3}
