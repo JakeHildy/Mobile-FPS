@@ -42,6 +42,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // ===== PRIVATE VARIABLES =====
     private Dictionary<string, RoomInfo> cachedRoomList; 
     private Dictionary<string, GameObject> roomListGameObjects;
+    private Dictionary<int, GameObject> playerListGameObjects;
 
 
     // ==================== UNITY METHODS ====================
@@ -150,6 +151,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                             PhotonNetwork.CurrentRoom.PlayerCount + "/" +
                             PhotonNetwork.CurrentRoom.MaxPlayers;
         
+        if (playerListGameObjects == null)
+        {
+            playerListGameObjects = new Dictionary<int, GameObject>();
+        }
+        
+
        // Instantiating player list gameobjects: 
         foreach (Player player in PhotonNetwork.PlayerList)
         {
@@ -167,10 +174,62 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             {
                 playerListGameObject.transform.Find("PlayerIndicator").gameObject.SetActive(false);
             }
+
+            playerListGameObjects.Add(player.ActorNumber, playerListGameObject);
         }
-       //PhotonNetwork.PlayerList 
     }
 
+    public override void OnPlayerEnteredRoom(Player newPlayer) 
+    {
+
+        roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " +
+                    "Players/Max.players: " +
+                    PhotonNetwork.CurrentRoom.PlayerCount + "/" +
+                    PhotonNetwork.CurrentRoom.MaxPlayers;
+
+        GameObject playerListGameObject = Instantiate(playerListPrefab);
+        playerListGameObject.transform.SetParent(playerListContent.transform);
+        playerListGameObject.transform.localScale = Vector3.one;
+
+        playerListGameObject.transform.Find("PlayerNameText").GetComponent<Text>().text = newPlayer.NickName;
+
+        if (newPlayer.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+        {
+            playerListGameObject.transform.Find("PlayerIndicator").gameObject.SetActive(true);
+        }
+        else
+        {
+            playerListGameObject.transform.Find("PlayerIndicator").gameObject.SetActive(false);
+        }
+
+        playerListGameObjects.Add(newPlayer.ActorNumber, playerListGameObject);
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        roomInfoText.text = "Room name: " + PhotonNetwork.CurrentRoom.Name + " " +
+                    "Players/Max.players: " +
+                    PhotonNetwork.CurrentRoom.PlayerCount + "/" +
+                    PhotonNetwork.CurrentRoom.MaxPlayers;
+                    
+        Destroy(playerListGameObjects[otherPlayer.ActorNumber].gameObject);
+        playerListGameObjects.Remove(otherPlayer.ActorNumber);
+    }
+
+    public override void OnLeftRoom()
+    {
+        ActivatePanel(GameOptions_UI_Panel.name);
+
+        foreach(GameObject playerListGameObject in playerListGameObjects.Values)
+        {
+            Destroy(playerListGameObject);
+        }
+
+        playerListGameObjects.Clear();
+        playerListGameObjects = null;
+
+
+    }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
