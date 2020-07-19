@@ -4622,6 +4622,7 @@ GameObject:
   - component: {fileID: 1360330762236525706}
   - component: {fileID: 1517346004046231398}
   - component: {fileID: 1216558812}
+  - component: {fileID: 7707798471871319344}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -4707,7 +4708,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360330762236525705}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cac42e995911143429aec094ebd59e5e, type: 3}
   m_Name: 
@@ -4787,6 +4788,19 @@ MonoBehaviour:
     slowDownRate: 150
     airControl: 1
     shellOffset: 0
+--- !u!114 &7707798471871319344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360330762236525705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a45b4ec842dfc3142a1628646f640c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystick: {fileID: 0}
 --- !u!1 &1360330762238065699
 GameObject:
   m_ObjectHideFlags: 0
