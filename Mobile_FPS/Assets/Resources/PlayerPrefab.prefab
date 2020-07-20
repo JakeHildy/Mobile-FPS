@@ -4708,7 +4708,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360330762236525705}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cac42e995911143429aec094ebd59e5e, type: 3}
   m_Name: 
@@ -4774,20 +4774,22 @@ MonoBehaviour:
       m_RotationOrder: 4
     CurrentTargetSpeed: 8
   mouseLook:
-    XSensitivity: 2
-    YSensitivity: 2
+    XSensitivity: 0.2
+    YSensitivity: 0.2
     clampVerticalRotation: 1
     MinimumX: -90
     MaximumX: 90
     smooth: 0
     smoothTime: 5
     lockCursor: 1
+    lookInputAxis: {x: 0, y: 0}
   advancedSettings:
     groundCheckDistance: 0.01
     stickToGroundHelperDistance: 0.5
     slowDownRate: 150
     airControl: 1
     shellOffset: 0
+  joystickInputAxis: {x: 0, y: 0}
 --- !u!114 &7707798471871319344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4801,6 +4803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 0}
+  fixedTouchField: {fileID: 0}
 --- !u!1 &1360330762238065699
 GameObject:
   m_ObjectHideFlags: 0
