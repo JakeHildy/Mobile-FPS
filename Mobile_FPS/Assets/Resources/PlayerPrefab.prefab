@@ -2055,7 +2055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1360330761191715964
 Transform:
   m_ObjectHideFlags: 0
@@ -2187,7 +2187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1360330761207264871
 Transform:
   m_ObjectHideFlags: 0
@@ -2688,7 +2688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1360330761375942214
 Transform:
   m_ObjectHideFlags: 0
@@ -3002,7 +3002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1360330761506331892
 Transform:
   m_ObjectHideFlags: 0
@@ -4623,6 +4623,8 @@ GameObject:
   - component: {fileID: 1517346004046231398}
   - component: {fileID: 1216558812}
   - component: {fileID: 7707798471871319344}
+  - component: {fileID: 566407659848684246}
+  - component: {fileID: 7278934230538853631}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -4694,10 +4696,10 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
+  - {fileID: 566407659848684246}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -4708,7 +4710,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360330762236525705}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cac42e995911143429aec094ebd59e5e, type: 3}
   m_Name: 
@@ -4719,6 +4721,10 @@ MonoBehaviour:
   Soldier_ChildGameObjects:
   - {fileID: 1360330761207264870}
   - {fileID: 1360330761375942213}
+  playerUIPrefab: {fileID: 3829663506146301796, guid: fa58bb7727807ad46a7b2d22c7b51e48,
+    type: 3}
+  FPSCamera: {fileID: 326026505}
+  audioListener: {fileID: 326026504}
 --- !u!114 &1216558812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4781,7 +4787,7 @@ MonoBehaviour:
     MaximumX: 90
     smooth: 0
     smoothTime: 5
-    lockCursor: 1
+    lockCursor: 0
     lookInputAxis: {x: 0, y: 0}
   advancedSettings:
     groundCheckDistance: 0.01
@@ -4804,6 +4810,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystick: {fileID: 0}
   fixedTouchField: {fileID: 0}
+--- !u!114 &566407659848684246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360330762236525705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+--- !u!95 &7278934230538853631
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360330762236525705}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a75d24eb79808fb41be4f95c844750a8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1360330762238065699
 GameObject:
   m_ObjectHideFlags: 0
